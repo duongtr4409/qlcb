@@ -26,11 +26,13 @@ spec:
             - containerPort: 8913
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-emp-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-emp-service/logs
@@ -87,11 +89,13 @@ spec:
             - containerPort: 8911
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./file-storage/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./file-storage/logs
@@ -149,11 +153,13 @@ spec:
             - containerPort: 8915
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-report-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-report-service/logs
@@ -206,11 +212,13 @@ spec:
             - containerPort: 8915
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
@@ -264,11 +272,13 @@ spec:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
@@ -323,11 +333,13 @@ spec:
             - containerPort: 8916
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-emp-service-draft/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-emp-service-draft/logs
@@ -380,11 +392,13 @@ spec:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
