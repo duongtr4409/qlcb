@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qlcb-btc-pv
+  namespace: qlcb-btc
+spec:
+  storageClassName: qlcb-btc
+  capacity:
+    storage: 10Gi # Tùy chọn dung lượng của bạn
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.100.170
+    path: /home/2bs/Downloads/pc/application/k8s/volume-data
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qlcb-btc-pvc     # Tên để các Service gọi tới
+  namespace: qlcb-btc            # Phải đúng Namespace của 6 Service
+spec:
+  storageClassName: qlcb-btc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi          # Yêu cầu một phần dung lượng từ PV
