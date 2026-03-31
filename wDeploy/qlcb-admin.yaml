@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: emp-qlcb-admin
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -26,11 +26,13 @@ spec:
             - containerPort: 8913
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-emp-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-emp-service/logs
@@ -75,7 +77,7 @@ spec:
     metadata:
       labels:
         app: file-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -87,11 +89,13 @@ spec:
             - containerPort: 8911
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./file-storage/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./file-storage/logs
@@ -137,7 +141,7 @@ spec:
     metadata:
       labels:
         app: report-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -149,11 +153,13 @@ spec:
             - containerPort: 8915
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-report-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-report-service/logs
@@ -194,7 +200,7 @@ spec:
     metadata:
       labels:
         app: system-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -206,11 +212,13 @@ spec:
             - containerPort: 8915
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
@@ -252,7 +260,7 @@ spec:
     metadata:
       labels:
         app: permission-admin-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -264,11 +272,13 @@ spec:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
@@ -311,7 +321,7 @@ spec:
     metadata:
       labels:
         app: emp-draft-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -323,11 +333,13 @@ spec:
             - containerPort: 8916
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-emp-service-draft/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-emp-service-draft/logs
@@ -368,7 +380,7 @@ spec:
     metadata:
       labels:
         app: permission-draft-qlcb
-    volume:
+    volumes:
       - name: qlcb-storage
         persistentVolumeClaim:
           claimName: qlcb-btc-pvc
@@ -380,11 +392,13 @@ spec:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties:ro
+              mountPath: /app/config.properties
               subPath: ./common-config/config.properties
+              readOnly: true
             - name: qlcb-storage
-              mountPath: /config:ro
+              mountPath: /config
               subPath: ./hr-system-service/config
+              readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
               subPath: ./hr-system-service/logs
