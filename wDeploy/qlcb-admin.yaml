@@ -14,11 +14,11 @@ spec:
     metadata:
       labels:
         app: emp-qlcb-admin
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-service
           image: qlcb-hr-emp-service:20260331
@@ -77,11 +77,11 @@ spec:
     metadata:
       labels:
         app: file-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-file-storage
           image: qlcb-file-storage:20260203
@@ -141,11 +141,11 @@ spec:
     metadata:
       labels:
         app: report-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-report-service
           image: qlcb-hr-report-service:20260203
@@ -200,11 +200,11 @@ spec:
     metadata:
       labels:
         app: system-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-report-service
           image: qlcb-hr-report-service:20260203
@@ -260,11 +260,11 @@ spec:
     metadata:
       labels:
         app: permission-admin-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-service
           image: qlcb-hr-permission-service:20260203
@@ -321,11 +321,11 @@ spec:
     metadata:
       labels:
         app: emp-draft-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-draft-service
           image: qlcb-hr-emp-draft-service:20260203
@@ -380,11 +380,11 @@ spec:
     metadata:
       labels:
         app: permission-draft-qlcb
-    volumes:
-      - name: qlcb-storage
-        persistentVolumeClaim:
-          claimName: qlcb-btc-pvc
     spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-service
           image: qlcb-hr-permission-service:20260203
