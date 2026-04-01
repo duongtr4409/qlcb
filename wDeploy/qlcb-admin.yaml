@@ -84,7 +84,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-file-storage
-          image: duowngtora/qlcb-file-storage:20260203
+          image: duowngtora/qlcb-file-storage:20260331
           ports:
             - containerPort: 8911
           volumeMounts:
