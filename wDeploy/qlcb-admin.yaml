@@ -21,7 +21,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-service
-          image: qlcb-hr-emp-service:20260331
+          image: duowngtora/qlcb-hr-emp-service:20260331
           ports:
             - containerPort: 8913
           volumeMounts:
@@ -54,7 +54,7 @@ spec:
     # - protocol: TCP
     - port: 8913           
       targetPort: 8913     
-      nodePort: 32913
+      nodePort: 31913
   type: NodePort          
 
 
@@ -84,7 +84,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-file-storage
-          image: qlcb-file-storage:20260203
+          image: duowngtora/qlcb-file-storage:20260203
           ports:
             - containerPort: 8911
           volumeMounts:
@@ -119,7 +119,7 @@ spec:
   ports:
     - port: 8911           
       targetPort: 8911     
-      nodePort: 32911
+      nodePort: 31911
   type: NodePort          
 
 
@@ -148,7 +148,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-report-service
-          image: qlcb-hr-report-service:20260203
+          image: duowngtora/qlcb-hr-report-service:20260203
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -180,7 +180,7 @@ spec:
   ports:
     - port: 8915           
       targetPort: 8915     
-      nodePort: 32915
+      nodePort: 31915
   type: NodePort          
 
 ---
@@ -206,8 +206,8 @@ spec:
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
       containers: 
-        - name: qlcb-hr-report-service
-          image: qlcb-hr-report-service:20260203
+        - name: qlcb-hr-system-service
+          image: duowngtora/qlcb-hr-system-service:20260203
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -239,7 +239,7 @@ spec:
   ports:
     - port: 8914           
       targetPort: 8914     
-      nodePort: 32914
+      nodePort: 31914
   type: NodePort          
 
 
@@ -267,7 +267,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-service
-          image: qlcb-hr-permission-service:20260203
+          image: duowngtora/qlcb-hr-permission-service:20260203
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -299,7 +299,7 @@ spec:
   ports:
     - port: 8912           
       targetPort: 8912
-      nodePort: 32921
+      nodePort: 31921
   type: NodePort        
 
 
@@ -328,7 +328,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-draft-service
-          image: qlcb-hr-emp-draft-service:20260203
+          image: duowngtora/qlcb-hr-emp-draft-service:20260203
           ports:
             - containerPort: 8916
           volumeMounts:
@@ -360,7 +360,7 @@ spec:
   ports:
     - port: 8916     
       targetPort: 8916
-      nodePort: 32916
+      nodePort: 31916
   type: NodePort 
 
 
@@ -387,7 +387,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-service
-          image: qlcb-hr-permission-service:20260203
+          image: duowngtora/qlcb-hr-permission-service:20260203
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -419,5 +419,5 @@ spec:
   ports:
     - port: 8912           
       targetPort: 8912
-      nodePort: 32912
+      nodePort: 31912
   type: NodePort        
