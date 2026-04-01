@@ -386,22 +386,22 @@ spec:
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
       containers: 
-        - name: qlcb-hr-permission-service
-          image: duowngtora/qlcb-hr-permission-service:20260203
+        - name: qlcb-hr-permission-draft-service
+          image: duowngtora/qlcb-hr-permission-draft-service:20260331
           ports:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties
-              subPath: ./common-config/config.properties
+              mountPath: /common-config
+              subPath: ./common-config
               readOnly: true
             - name: qlcb-storage
               mountPath: /config
-              subPath: ./hr-system-service/config
+              subPath: ./permission-service/config
               readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
-              subPath: ./hr-system-service/logs
+              subPath: ./permission-service/logs
             - name: qlcb-storage
               mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
               subPath: ./data/file
