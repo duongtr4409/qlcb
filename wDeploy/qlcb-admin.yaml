@@ -267,7 +267,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-admin-service
-          image: duowngtora/qlcb-hr-permission-admin-service:20260401
+          image: duowngtora/qlcb-hr-permission-admin-service:20260401v2
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -387,7 +387,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-draft-service
-          image: duowngtora/qlcb-hr-permission-draft-service:20260331
+          image: duowngtora/qlcb-hr-permission-draft-service:20260401v2
           ports:
             - containerPort: 8912
           volumeMounts:
