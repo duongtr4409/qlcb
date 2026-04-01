@@ -272,16 +272,16 @@ spec:
             - containerPort: 8912
           volumeMounts:
             - name: qlcb-storage
-              mountPath: /app/config.properties
-              subPath: ./common-config/config.properties
+              mountPath: /common-config
+              subPath: ./common-config
               readOnly: true
             - name: qlcb-storage
               mountPath: /config
-              subPath: ./hr-system-service/config
+              subPath: ./hr-permission-admin-service/config
               readOnly: true
             - name: qlcb-storage
               mountPath: /app/logs
-              subPath: ./hr-system-service/logs
+              subPath: ./hr-permission-admin-service/logs
             - name: qlcb-storage
               mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
               subPath: ./data/file
