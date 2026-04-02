@@ -442,7 +442,7 @@ spec:
     spec:
       containers: 
         - name: qlcb-hr-admin-fe
-          image: duowngtora/qlcb-hr-admin-fe:20260402v2
+          image: duowngtora/qlcb-hr-admin-fe:20260402v3
           ports:
             - containerPort: 80
 
@@ -483,7 +483,7 @@ spec:
     spec:
       containers: 
         - name: qlcb-hr-draft-fe
-          image: duowngtora/qlcb-hr-draft-fe:20260402v2
+          image: duowngtora/qlcb-hr-draft-fe:20260402v3
           ports:
             - containerPort: 80
 
