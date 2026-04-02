@@ -421,3 +421,85 @@ spec:
       targetPort: 8912
       nodePort: 31912
   type: NodePort        
+
+
+### FE EMP ADMIN ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-admin-qlcb-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-admin-qlcb
+  template:
+    metadata:
+      labels:
+        app: fe-admin-qlcb
+    spec:
+      containers: 
+        - name: qlcb-hr-admin-fe
+          image: duowngtora/qlcb-hr-admin-fe:20260401
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-admin-qlcb-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: fe-admin-qlcb
+  ports:
+    - port: 80           
+      targetPort: 80
+      nodePort: 31980
+  type: NodePort   
+
+
+
+  
+### FE EMP DRAFT ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-draft-qlcb-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-draft-qlcb
+  template:
+    metadata:
+      labels:
+        app: fe-draft-qlcb
+    spec:
+      containers: 
+        - name: qlcb-hr-draft-fe
+          image: duowngtora/qlcb-hr-draft-fe:20260401
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-draft-qlcb-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: fe-draft-qlcb
+  ports:
+    - port: 80           
+      targetPort: 80
+      nodePort: 31981
+  type: NodePort   
+
+
