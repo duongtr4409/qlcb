@@ -328,7 +328,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-draft-service
-          image: duowngtora/qlcb-hr-emp-draft-service:20260203
+          image: duowngtora/qlcb-hr-emp-draft-service:20260401
           ports:
             - containerPort: 8916
           volumeMounts:
