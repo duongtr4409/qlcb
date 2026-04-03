@@ -21,7 +21,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-service
-          image: duowngtora/qlcb-hr-emp-service:20260331
+          image: duowngtora/qlcb-hr-emp-service:20260403
           ports:
             - containerPort: 8913
           volumeMounts:
@@ -85,7 +85,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-file-storage
-          image: duowngtora/qlcb-file-storage:20260331
+          image: duowngtora/qlcb-file-storage:20260403
           ports:
             - containerPort: 8911
           volumeMounts:
@@ -150,7 +150,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-report-service
-          image: duowngtora/qlcb-hr-report-service:20260331
+          image: duowngtora/qlcb-hr-report-service:20260403
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -210,7 +210,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-system-service
-          image: duowngtora/qlcb-hr-system-service:20260331
+          image: duowngtora/qlcb-hr-system-service:20260403
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -271,7 +271,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-permission-admin-service
-          image: duowngtora/qlcb-hr-permission-admin-service:20260401v2
+          image: duowngtora/qlcb-hr-permission-admin-service:20260403
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -333,7 +333,7 @@ spec:
             claimName: qlcb-btc-pvc
       containers: 
         - name: qlcb-hr-emp-draft-service
-          image: duowngtora/qlcb-hr-emp-draft-service:20260401
+          image: duowngtora/qlcb-hr-emp-draft-service:20260403
           ports:
             - containerPort: 8916
           volumeMounts:
