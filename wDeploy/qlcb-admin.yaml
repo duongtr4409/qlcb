@@ -67,17 +67,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: file-qlcb-deploy
+  name: file-qlcb-admin-deploy
   namespace: qlcb-btc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: file-qlcb
+      app: file-qlcb-admin
   template:
     metadata:
       labels:
-        app: file-qlcb
+        app: file-qlcb-admin
     spec:
       volumes:
         - name: qlcb-storage
@@ -112,11 +112,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: file-qlcb-svc     
+  name: file-qlcb-admin-svc     
   namespace: qlcb-btc
 spec:
   selector:
-    app: file-qlcb   
+    app: file-qlcb-admin   
   ports:
     - port: 8911           
       targetPort: 8911     
@@ -132,17 +132,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: report-qlcb-deploy
+  name: report-qlcb-admin-deploy
   namespace: qlcb-btc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: report-qlcb
+      app: report-qlcb-admin
   template:
     metadata:
       labels:
-        app: report-qlcb
+        app: report-qlcb-admin
     spec:
       volumes:
         - name: qlcb-storage
@@ -174,11 +174,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: report-qlcb-svc     
+  name: report-qlcb-admin-svc     
   namespace: qlcb-btc
 spec:
   selector:
-    app: report-qlcb  
+    app: report-qlcb-admin  
   ports:
     - port: 8915           
       targetPort: 8915     
@@ -192,17 +192,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: system-qlcb-deploy
+  name: system-qlcb-admin-deploy
   namespace: qlcb-btc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: system-qlcb
+      app: system-qlcb-admin
   template:
     metadata:
       labels:
-        app: system-qlcb
+        app: system-qlcb-admin
     spec:
       volumes:
         - name: qlcb-storage
@@ -234,11 +234,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: system-qlcb-svc     
+  name: system-qlcb-admin-svc     
   namespace: qlcb-btc
 spec:
   selector:
-    app: system-qlcb
+    app: system-qlcb-admin
   ports:
     - port: 8914           
       targetPort: 8914     
@@ -253,25 +253,25 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: permission-admin-qlcb-deploy
+  name: permission-qlcb-admin-deploy
   namespace: qlcb-btc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: permission-admin-qlcb
+      app: permission-qlcb-admin
   template:
     metadata:
       labels:
-        app: permission-admin-qlcb
+        app: permission-qlcb-admin
     spec:
       volumes:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
       containers: 
-        - name: qlcb-hr-permission-admin-service
-          image: duowngtora/qlcb-hr-permission-admin-service:20260403
+        - name: qlcb-hr-permission-service
+          image: duowngtora/qlcb-hr-permission-service:20260403
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -295,11 +295,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: permission-admin-qlcb-svc     
+  name: permission-qlcb-admin-svc     
   namespace: qlcb-btc
 spec:
   selector:
-    app: permission-admin-qlcb
+    app: permission-qlcb-admin
   ports:
     - port: 8912           
       targetPort: 8912
@@ -315,17 +315,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: emp-draft-qlcb-deploy
+  name: emp-draft-qlcb-admin-deploy
   namespace: qlcb-btc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: emp-draft-qlcb
+      app: emp-draft-qlcb-admin
   template:
     metadata:
       labels:
-        app: emp-draft-qlcb
+        app: emp-draft-qlcb-admin
     spec:
       volumes:
         - name: qlcb-storage
@@ -357,11 +357,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emp-draft-qlcb-svc     
+  name: emp-draft-qlcb-admin-svc     
   namespace: qlcb-btc
 spec:
   selector:
-    app: emp-draft-qlcb
+    app: emp-draft-qlcb-admin
   ports:
     - port: 8916     
       targetPort: 8916
@@ -369,67 +369,9 @@ spec:
   type: NodePort 
   externalTrafficPolicy: Local  
 
----
-
-### PERMISSION DRAFT ###
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: permission-draft-qlcb-deploy
-  namespace: qlcb-btc
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: permission-draft-qlcb
-  template:
-    metadata:
-      labels:
-        app: permission-draft-qlcb
-    spec:
-      volumes:
-        - name: qlcb-storage
-          persistentVolumeClaim:
-            claimName: qlcb-btc-pvc
-      containers: 
-        - name: qlcb-hr-permission-draft-service
-          image: duowngtora/qlcb-hr-permission-draft-service:20260401v2
-          ports:
-            - containerPort: 8912
-          volumeMounts:
-            - name: qlcb-storage
-              mountPath: /common-config
-              subPath: ./common-config
-              readOnly: true
-            - name: qlcb-storage
-              mountPath: /config
-              subPath: ./permission-service/config
-              readOnly: true
-            - name: qlcb-storage
-              mountPath: /app/logs
-              subPath: ./permission-service/logs
-            - name: qlcb-storage
-              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
-              subPath: ./data/file
 
 ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: permission-draft-qlcb-svc     
-  namespace: qlcb-btc
-spec:
-  selector:
-    app: permission-draft-qlcb
-  ports:
-    - port: 8912           
-      targetPort: 8912
-      nodePort: 31912
-  type: NodePort 
-  externalTrafficPolicy: Local         
-
----
 
 ### FE EMP ADMIN ###
 apiVersion: apps/v1
