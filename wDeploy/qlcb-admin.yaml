@@ -22,11 +22,11 @@ spec:
       containers: 
         - name: qlcb-hr-emp-service
           image: duowngtora/qlcb-hr-emp-service:20260403
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8913
           volumeMounts:
@@ -91,11 +91,11 @@ spec:
       containers: 
         - name: qlcb-file-storage
           image: duowngtora/qlcb-file-storage:20260403
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8911
           volumeMounts:
@@ -161,11 +161,11 @@ spec:
       containers: 
         - name: qlcb-hr-report-service
           image: duowngtora/qlcb-hr-report-service:20260403
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -226,11 +226,11 @@ spec:
       containers: 
         - name: qlcb-hr-system-service
           image: duowngtora/qlcb-hr-system-service:20260403v2
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8915
           volumeMounts:
@@ -292,11 +292,11 @@ spec:
       containers: 
         - name: qlcb-hr-permission-service
           image: duowngtora/qlcb-hr-permission-service:20260403
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8912
           volumeMounts:
@@ -359,11 +359,11 @@ spec:
       containers: 
         - name: qlcb-hr-emp-draft-service
           image: duowngtora/qlcb-hr-emp-draft-service:20260403
-          # resources:
-          #   requests:
-          #     memory: "100Mi"
-          #   limits:
-          #     memory: "2048Mi"
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: "2048Mi"
           ports:
             - containerPort: 8916
           volumeMounts:
