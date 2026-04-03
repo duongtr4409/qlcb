@@ -22,19 +22,11 @@ spec:
       containers: 
         - name: qlcb-hr-emp-service
           image: duowngtora/qlcb-hr-emp-service:20260403
-<<<<<<< HEAD
           # resources:
           #   requests:
           #     memory: "100Mi"
           #   limits:
           #     memory: "2048Mi"
-=======
-          resources:
-            requests:
-              memory: "100Mi"
-            limits:
-              memory: "2048Mi"
->>>>>>> d256352fa3db095579ffc0a1a5427638ae3ae0d1
           ports:
             - containerPort: 8913
           volumeMounts:
