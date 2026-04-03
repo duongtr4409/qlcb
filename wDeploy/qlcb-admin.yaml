@@ -55,7 +55,8 @@ spec:
     - port: 8913           
       targetPort: 8913     
       nodePort: 31913
-  type: NodePort          
+  type: NodePort 
+  externalTrafficPolicy: Local  
 
 
 ---
@@ -120,7 +121,8 @@ spec:
     - port: 8911           
       targetPort: 8911     
       nodePort: 31911
-  type: NodePort          
+  type: NodePort 
+  externalTrafficPolicy: Local           
 
 
 ---
@@ -181,7 +183,8 @@ spec:
     - port: 8915           
       targetPort: 8915     
       nodePort: 31915
-  type: NodePort          
+  type: NodePort 
+  externalTrafficPolicy: Local           
 
 ---
 
@@ -240,7 +243,8 @@ spec:
     - port: 8914           
       targetPort: 8914     
       nodePort: 31914
-  type: NodePort          
+  type: NodePort 
+  externalTrafficPolicy: Local           
 
 
 ---
@@ -300,7 +304,8 @@ spec:
     - port: 8912           
       targetPort: 8912
       nodePort: 31921
-  type: NodePort        
+  type: NodePort   
+  externalTrafficPolicy: Local       
 
 
   
@@ -362,6 +367,7 @@ spec:
       targetPort: 8916
       nodePort: 31916
   type: NodePort 
+  externalTrafficPolicy: Local  
 
 ---
 
@@ -420,7 +426,8 @@ spec:
     - port: 8912           
       targetPort: 8912
       nodePort: 31912
-  type: NodePort        
+  type: NodePort 
+  externalTrafficPolicy: Local         
 
 ---
 
@@ -460,7 +467,8 @@ spec:
     - port: 80           
       targetPort: 80
       nodePort: 31980
-  type: NodePort   
+  type: NodePort  
+  externalTrafficPolicy: Local   
 
 
 ---
@@ -501,6 +509,7 @@ spec:
     - port: 80           
       targetPort: 80
       nodePort: 31981
-  type: NodePort   
+  type: NodePort  
+  externalTrafficPolicy: Local   
 
 
