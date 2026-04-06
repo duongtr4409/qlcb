@@ -473,9 +473,9 @@ spec:
   selector:
     app: {{ .Values.adminSite.feAdmin.name }}
   ports:
-    - port: {{ .Values.adminSite.permission.port.servicePort | default "80" }}
-      targetPort: {{ .Values.adminSite.permission.port.containerPort | default "80" }}
-      nodePort:  {{ .Values.adminSite.permission.port.serviceNodePort | default "31980" }}
+    - port: {{ .Values.adminSite.feAdmin.port.servicePort | default "80" }}
+      targetPort: {{ .Values.adminSite.feAdmin.port.containerPort | default "80" }}
+      nodePort:  {{ .Values.adminSite.feAdmin.port.serviceNodePort | default "31980" }}
   type: NodePort
   externalTrafficPolicy: Local
 
