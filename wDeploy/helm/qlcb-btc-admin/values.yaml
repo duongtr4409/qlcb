@@ -1,5 +1,12 @@
 namespaceName: "qlcb-btc"
 
+harborCredentials:
+  server: "harbor.2bsystem.com.vn"
+  username: "admin"
+  password: "123456a@"
+  secretName: "harbor-secret"
+  projectName: "qlcb-btc"
+
 volume:
   storageClassName: "qlcb-btc"
   nfs:
@@ -11,8 +18,8 @@ adminSite:
   emp:
     name: "emp-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-emp-service"
-      tag: "20260403"
+      name: "qlcb-hr-emp-service"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -23,8 +30,8 @@ adminSite:
   file:
     name: "file-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-file-storage"
-      tag: "20260403"
+      name: "qlcb-file-storage"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -35,8 +42,8 @@ adminSite:
   report:
     name: "report-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-report-service"
-      tag: "20260403"
+      name: "qlcb-hr-report-service"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -47,8 +54,8 @@ adminSite:
   system:
     name: "system-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-system-service"
-      tag: "20260403v2"
+      name: "qlcb-hr-system-service"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -59,8 +66,8 @@ adminSite:
   permission:
     name: "permission-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-permission-service"
-      tag: "20260403"
+      name: "qlcb-hr-permission-service"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -71,8 +78,8 @@ adminSite:
   empDraft:
     name: "emp-draft-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-emp-draft-service"
-      tag: "20260403"
+      name: "qlcb-hr-emp-draft-service"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:
@@ -83,8 +90,8 @@ adminSite:
   feAdmin:
     name: "fe-qlcb-admin"
     image:
-      name: "duowngtora/qlcb-hr-admin-fe"
-      tag: "20260403"
+      name: "qlcb-hr-admin-fe"
+      tag: "20260406"
     limit:
       memory: "2048Mi"
     port:

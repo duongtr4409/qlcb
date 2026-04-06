@@ -19,9 +19,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.emp.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.emp.image.name .Values.adminSite.emp.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.emp.image.name .Values.adminSite.emp.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -89,9 +91,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.file.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.file.image.name .Values.adminSite.file.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.file.image.name .Values.adminSite.file.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -163,9 +167,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.report.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.report.image.name .Values.adminSite.report.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.report.image.name .Values.adminSite.report.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -232,9 +238,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.system.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.system.image.name .Values.adminSite.system.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.system.image.name .Values.adminSite.system.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -304,9 +312,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.permission.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.permission.image.name .Values.adminSite.permission.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.permission.image.name .Values.adminSite.permission.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -375,9 +385,11 @@ spec:
         - name: qlcb-storage
           persistentVolumeClaim:
             claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.empDraft.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.empDraft.image.name .Values.adminSite.empDraft.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.empDraft.image.name .Values.adminSite.empDraft.image.tag }}
           resources:
             requests:
               memory: "100Mi"
@@ -442,9 +454,11 @@ spec:
       labels:
         app: {{ .Values.adminSite.feAdmin.name }}
     spec:
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
       containers:
         - name: {{ .Values.adminSite.feAdmin.name }}
-          image: {{ printf "%s:%s" .Values.adminSite.feAdmin.image.name .Values.adminSite.feAdmin.image.tag }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.adminSite.feAdmin.image.name .Values.adminSite.feAdmin.image.tag }}
           ports:
             - containerPort: {{ .Values.adminSite.permission.port.containerPort | default "80" }}
 
