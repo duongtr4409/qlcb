@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: qlcb-btc
   capacity:
-    storage: 10Gi # Tùy chọn dung lượng của bạn
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
@@ -21,12 +21,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: qlcb-btc-pvc     # Tên để các Service gọi tới
-  namespace: qlcb-btc            # Phải đúng Namespace của 6 Service
+  name: qlcb-btc-pvc
+  namespace: qlcb-btc
 spec:
   storageClassName: qlcb-btc
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi          # Yêu cầu một phần dung lượng từ PV
+      storage: 10Gi
