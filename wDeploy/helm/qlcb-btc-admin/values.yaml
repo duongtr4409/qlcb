@@ -1,0 +1,94 @@
+namespaceName: "qlcb-btc"
+
+volume:
+  storageClassName: "qlcb-btc"
+  nfs:
+    server: "192.168.100.170"
+    path: "/home/2bs/Downloads/pc/application/k8s/volume-data"
+
+
+adminSite:
+  emp:
+    name: "emp-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-emp-service"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8913"
+      servicePort: "8913"
+      serviceNodePort: "31913"
+
+  file:
+    name: "file-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-file-storage"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8911"
+      servicePort: "8911"
+      serviceNodePort: "31911"
+
+  report:
+    name: "report-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-report-service"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8915"
+      servicePort: "8915"
+      serviceNodePort: "31915"
+
+  system:
+    name: "system-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-system-service"
+      tag: "20260403v2"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8914"
+      servicePort: "8914"
+      serviceNodePort: "31914"
+
+  permission:
+    name: "permission-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-permission-service"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8912"
+      servicePort: "8912"
+      serviceNodePort: "31921"
+
+  empDraft:
+    name: "emp-draft-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-emp-draft-service"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8916"
+      servicePort: "8916"
+      serviceNodePort: "31916"
+
+  feAdmin:
+    name: "fe-qlcb-admin"
+    image:
+      name: "duowngtora/qlcb-hr-admin-fe"
+      tag: "20260403"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "80"
+      servicePort: "80"
+      serviceNodePort: "31980"
+

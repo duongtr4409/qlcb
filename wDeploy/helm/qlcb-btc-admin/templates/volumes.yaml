@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qlcb-btc-pv
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  storageClassName: {{ .Values.volume.storageClassName  | default "qlcb-btc" }}
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: {{ .Values.volume.nfs.server | default "192.168.100.170" }}
+    path: {{ .Values.volume.nfs.path  | default "/home/2bs/Downloads/pc/application/k8s/volume-data" }}
+
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qlcb-btc-pvc
+  namespace: {{ .Values.namespaceName | default "qlcb-btc"  }}
+spec:
+  storageClassName: {{ .Values.volume.storageClassName  | default "qlcb-btc" }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi

@@ -1,0 +1,487 @@
+
+### ADMIN - EMP ###  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emp-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emp-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: emp-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-hr-emp-service
+          image: duowngtora/qlcb-hr-emp-service:20260403
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8913
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: emp-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: emp-qlcb-admin
+  ports:
+    # - protocol: TCP
+    - port: 8913           
+      targetPort: 8913     
+      nodePort: 31913
+  type: NodePort 
+  externalTrafficPolicy: Local  
+
+
+---
+
+
+
+### FILE ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: file-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-file-storage
+          image: duowngtora/qlcb-file-storage:20260403
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8911
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./file-storage/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./file-storage/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+            - name: qlcb-storage
+              mountPath: /data
+              subPath: ./file-storage/data
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: file-qlcb-admin   
+  ports:
+    - port: 8911           
+      targetPort: 8911     
+      nodePort: 31911
+  type: NodePort 
+  externalTrafficPolicy: Local           
+
+
+---
+
+
+### Report ### 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: report-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: report-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-hr-report-service
+          image: duowngtora/qlcb-hr-report-service:20260403
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8915
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-report-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-report-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: report-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: report-qlcb-admin  
+  ports:
+    - port: 8915           
+      targetPort: 8915     
+      nodePort: 31915
+  type: NodePort 
+  externalTrafficPolicy: Local           
+
+---
+
+### SYSTEM ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: system-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: system-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-hr-system-service
+          image: duowngtora/qlcb-hr-system-service:20260403v2
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8915
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-system-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-system-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: system-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: system-qlcb-admin
+  ports:
+    - port: 8914           
+      targetPort: 8914     
+      nodePort: 31914
+  type: NodePort 
+  externalTrafficPolicy: Local           
+
+
+---
+
+### PERMISSION ADMIN ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: permission-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: permission-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: permission-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-hr-permission-service
+          image: duowngtora/qlcb-hr-permission-service:20260403
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8912
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /common-config
+              subPath: ./common-config-draft
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./permission-admin-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./permission-admin-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: permission-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: permission-qlcb-admin
+  ports:
+    - port: 8912           
+      targetPort: 8912
+      nodePort: 31921
+  type: NodePort   
+  externalTrafficPolicy: Local       
+
+
+  
+---
+
+### EMP DRAFT ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emp-draft-qlcb-admin-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emp-draft-qlcb-admin
+  template:
+    metadata:
+      labels:
+        app: emp-draft-qlcb-admin
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers: 
+        - name: qlcb-hr-emp-draft-service
+          image: duowngtora/qlcb-hr-emp-draft-service:20260403
+          # resources:
+          #   requests:
+          #     memory: "100Mi"
+          #   limits:
+          #     memory: "2048Mi"
+          ports:
+            - containerPort: 8916
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service-draft/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service-draft/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: emp-draft-qlcb-admin-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: emp-draft-qlcb-admin
+  ports:
+    - port: 8916     
+      targetPort: 8916
+      nodePort: 31916
+  type: NodePort 
+  externalTrafficPolicy: Local  
+
+
+---
+
+
+### FE EMP ADMIN ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-admin-qlcb-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-admin-qlcb
+  template:
+    metadata:
+      labels:
+        app: fe-admin-qlcb
+    spec:
+      containers: 
+        - name: qlcb-hr-admin-fe
+          image: duowngtora/qlcb-hr-admin-fe:20260402v4
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-admin-qlcb-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: fe-admin-qlcb
+  ports:
+    - port: 80           
+      targetPort: 80
+      nodePort: 31980
+  type: NodePort  
+  externalTrafficPolicy: Local   
+
+
+---
+  
+### FE EMP DRAFT ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-draft-qlcb-deploy
+  namespace: qlcb-btc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-draft-qlcb
+  template:
+    metadata:
+      labels:
+        app: fe-draft-qlcb
+    spec:
+      containers: 
+        - name: qlcb-hr-draft-fe
+          image: duowngtora/qlcb-hr-draft-fe:20260402v4
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-draft-qlcb-svc     
+  namespace: qlcb-btc
+spec:
+  selector:
+    app: fe-draft-qlcb
+  ports:
+    - port: 80           
+      targetPort: 80
+      nodePort: 31981
+  type: NodePort  
+  externalTrafficPolicy: Local   
+
+

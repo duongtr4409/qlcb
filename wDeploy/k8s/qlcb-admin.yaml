@@ -232,7 +232,7 @@ spec:
             limits:
               memory: "2048Mi"
           ports:
-            - containerPort: 8915
+            - containerPort: 8914
           volumeMounts:
             - name: qlcb-storage
               mountPath: /app/config.properties

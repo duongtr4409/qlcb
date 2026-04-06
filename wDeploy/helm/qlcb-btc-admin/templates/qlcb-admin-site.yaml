@@ -1,0 +1,469 @@
+### EMP ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.emp.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.emp.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.emp.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.emp.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.emp.image.name .Values.adminSite.emp.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.emp.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.emp.port.containerPort | default "8913" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.emp.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.emp.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.emp.port.servicePort | default "8913" }}
+      targetPort: {{ .Values.adminSite.emp.port.containerPort | default "8913" }}
+      nodePort:  {{ .Values.adminSite.emp.port.serviceNodePort | default "31913" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### FILE ### 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.file.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.file.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.file.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.file.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.file.image.name .Values.adminSite.file.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.file.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.file.port.containerPort | default "8913" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./file-storage/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./file-storage/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+            - name: qlcb-storage
+              mountPath: /data
+              subPath: ./file-storage/data
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.file.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.file.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.file.port.servicePort | default "8911" }}
+      targetPort: {{ .Values.adminSite.file.port.containerPort | default "8911" }}
+      nodePort:  {{ .Values.adminSite.file.port.serviceNodePort | default "31911" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### REPORT  ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.report.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.report.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.report.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.report.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.report.image.name .Values.adminSite.report.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.report.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.report.port.containerPort | default "8915" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-report-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-report-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.report.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.report.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.report.port.servicePort | default "8915" }}
+      targetPort: {{ .Values.adminSite.report.port.containerPort | default "8915" }}
+      nodePort:  {{ .Values.adminSite.report.port.serviceNodePort | default "31915" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+### SYSTEM ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.system.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.system.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.system.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.system.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.system.image.name .Values.adminSite.system.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.system.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.system.port.containerPort | default "8914" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-system-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-system-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.system.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.system.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.system.port.servicePort | default "8914" }}
+      targetPort: {{ .Values.adminSite.system.port.containerPort | default "8914" }}
+      nodePort:  {{ .Values.adminSite.system.port.serviceNodePort | default "31914" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+
+### PERMISSTION ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.permission.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.permission.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.permission.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.permission.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.permission.image.name .Values.adminSite.permission.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.permission.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.permission.port.containerPort | default "8912" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /common-config
+              subPath: ./common-config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./permission-admin-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./permission-admin-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.permission.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.permission.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.permission.port.servicePort | default "8912" }}
+      targetPort: {{ .Values.adminSite.permission.port.containerPort | default "8912" }}
+      nodePort:  {{ .Values.adminSite.permission.port.serviceNodePort | default "31921" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### DRAFT ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.empDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.empDraft.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.empDraft.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      containers:
+        - name: {{ .Values.adminSite.empDraft.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.empDraft.image.name .Values.adminSite.empDraft.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.adminSite.empDraft.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.adminSite.empDraft.port.containerPort | default "8916" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service-draft/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service-draft/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.empDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.empDraft.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.adminSite.empDraft.port.servicePort | default "8916" }}
+      targetPort: {{ .Values.adminSite.empDraft.port.containerPort | default "8916" }}
+      nodePort:  {{ .Values.adminSite.empDraft.port.serviceNodePort | default "31916" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+
+### FE EMP ADMIN ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.adminSite.feAdmin.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.adminSite.feAdmin.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adminSite.feAdmin.name }}
+    spec:
+      containers:
+        - name: {{ .Values.adminSite.feAdmin.name }}
+          image: {{ printf "%s:%s" .Values.adminSite.feAdmin.image.name .Values.adminSite.feAdmin.image.tag }}
+          ports:
+            - containerPort: {{ .Values.adminSite.permission.port.containerPort | default "80" }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.adminSite.feAdmin.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.adminSite.feAdmin.name }}
+  ports:
+    - port: {{ .Values.adminSite.permission.port.servicePort | default "80" }}
+      targetPort: {{ .Values.adminSite.permission.port.containerPort | default "80" }}
+      nodePort:  {{ .Values.adminSite.permission.port.serviceNodePort | default "31980" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
