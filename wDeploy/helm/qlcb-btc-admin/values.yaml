@@ -79,7 +79,7 @@ adminSite:
     name: "emp-draft-qlcb-admin"
     image:
       name: "qlcb-hr-emp-draft-service"
-      tag: "20260406"
+      tag: "20260406v2"
     limit:
       memory: "2048Mi"
     port:
