@@ -1,0 +1,483 @@
+### EMP ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.emp.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.emp.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.emp.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.emp.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.emp.image.name .Values.draftSite.emp.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.emp.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.emp.port.containerPort | default "8913" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config-draft/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.emp.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.emp.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.emp.port.servicePort | default "8913" }}
+      targetPort: {{ .Values.draftSite.emp.port.containerPort | default "8913" }}
+      nodePort:  {{ .Values.draftSite.emp.port.serviceNodePort | default "31913" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### FILE ### 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.file.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.file.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.file.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.file.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.file.image.name .Values.draftSite.file.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.file.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.file.port.containerPort | default "8913" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config-draft/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./file-storage/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./file-storage/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+            - name: qlcb-storage
+              mountPath: /data
+              subPath: ./file-storage/data
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.file.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.file.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.file.port.servicePort | default "8911" }}
+      targetPort: {{ .Values.draftSite.file.port.containerPort | default "8911" }}
+      nodePort:  {{ .Values.draftSite.file.port.serviceNodePort | default "31911" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### REPORT  ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.report.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.report.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.report.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.report.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.report.image.name .Values.draftSite.report.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.report.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.report.port.containerPort | default "8915" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config-draft/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-report-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-report-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.report.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.report.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.report.port.servicePort | default "8915" }}
+      targetPort: {{ .Values.draftSite.report.port.containerPort | default "8915" }}
+      nodePort:  {{ .Values.draftSite.report.port.serviceNodePort | default "31915" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+### SYSTEM ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.system.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.system.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.system.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.system.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.system.image.name .Values.draftSite.system.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.system.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.system.port.containerPort | default "8914" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config-draft/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-system-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-system-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.system.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.system.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.system.port.servicePort | default "8914" }}
+      targetPort: {{ .Values.draftSite.system.port.containerPort | default "8914" }}
+      nodePort:  {{ .Values.draftSite.system.port.serviceNodePort | default "31914" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+
+### PERMISSTION ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.permission.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.permission.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.permission.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.permission.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.permission.image.name .Values.draftSite.permission.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.permission.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.permission.port.containerPort | default "8912" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /common-config
+              subPath: ./common-config-draft
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./permission-service/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./permission-service/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.permission.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.permission.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.permission.port.servicePort | default "8912" }}
+      targetPort: {{ .Values.draftSite.permission.port.containerPort | default "8912" }}
+      nodePort:  {{ .Values.draftSite.permission.port.serviceNodePort | default "31921" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+### DRAFT ###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.empDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.empDraft.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.empDraft.name }}
+    spec:
+      volumes:
+        - name: qlcb-storage
+          persistentVolumeClaim:
+            claimName: qlcb-btc-pvc
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.empDraft.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.empDraft.image.name .Values.draftSite.empDraft.image.tag }}
+          resources:
+            requests:
+              memory: "100Mi"
+            limits:
+              memory: {{ .Values.draftSite.empDraft.limit.memory | default "2048Mi" }}
+          ports:
+            - containerPort: {{ .Values.draftSite.empDraft.port.containerPort | default "8916" }}
+          volumeMounts:
+            - name: qlcb-storage
+              mountPath: /app/config.properties
+              subPath: ./common-config-draft/config.properties
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /config
+              subPath: ./hr-emp-service-draft/config
+              readOnly: true
+            - name: qlcb-storage
+              mountPath: /app/logs
+              subPath: ./hr-emp-service-draft/logs
+            - name: qlcb-storage
+              mountPath: /home/2bs/Downloads/pc/application/BTC/be/data/file
+              subPath: ./data/file
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.empDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.empDraft.name }}
+  ports:
+    # - protocol: TCP
+    - port: {{ .Values.draftSite.empDraft.port.servicePort | default "8916" }}
+      targetPort: {{ .Values.draftSite.empDraft.port.containerPort | default "8916" }}
+      nodePort:  {{ .Values.draftSite.empDraft.port.serviceNodePort | default "31916" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---
+
+
+
+
+
+### FE EMP ADMIN ###
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-deploy" .Values.draftSite.feDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.draftSite.feDraft.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.draftSite.feDraft.name }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.harborCredentials.secretName }}
+      containers:
+        - name: {{ .Values.draftSite.feDraft.name }}
+          image: {{ printf "%s/%s/%s:%s" .Values.harborCredentials.server .Values.harborCredentials.projectName .Values.draftSite.feDraft.image.name .Values.draftSite.feDraft.image.tag }}
+          ports:
+            - containerPort: {{ .Values.draftSite.permission.port.containerPort | default "80" }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-svc" .Values.draftSite.feDraft.name }}
+  namespace: {{ .Values.namespaceName | default "qlcb-btc" }}
+spec:
+  selector:
+    app: {{ .Values.draftSite.feDraft.name }}
+  ports:
+    - port: {{ .Values.draftSite.feDraft.port.servicePort | default "80" }}
+      targetPort: {{ .Values.draftSite.feDraft.port.containerPort | default "80" }}
+      nodePort:  {{ .Values.draftSite.feDraft.port.serviceNodePort | default "31980" }}
+  type: NodePort
+  externalTrafficPolicy: Local
+
+
+---

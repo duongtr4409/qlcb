@@ -99,3 +99,90 @@ adminSite:
       servicePort: "80"
       serviceNodePort: "31980"
 
+
+
+
+draftSite:
+  emp:
+    name: "emp-qlcb-draft"
+    image:
+      name: "qlcb-hr-emp-service"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8913"
+      servicePort: "8913"
+      serviceNodePort: "31813"
+
+  file:
+    name: "file-qlcb-draft"
+    image:
+      name: "qlcb-file-storage"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8911"
+      servicePort: "8911"
+      serviceNodePort: "31811"
+
+  report:
+    name: "report-qlcb-draft"
+    image:
+      name: "qlcb-hr-report-service"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8915"
+      servicePort: "8915"
+      serviceNodePort: "31815"
+
+  system:
+    name: "system-qlcb-draft"
+    image:
+      name: "qlcb-hr-system-service"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8914"
+      servicePort: "8914"
+      serviceNodePort: "31814"
+
+  permission:
+    name: "permission-qlcb-draft"
+    image:
+      name: "qlcb-hr-permission-service"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8912"
+      servicePort: "8912"
+      serviceNodePort: "31812"
+
+  empDraft:
+    name: "emp-draft-qlcb-draft"
+    image:
+      name: "qlcb-hr-emp-draft-service"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "8916"
+      servicePort: "8916"
+      serviceNodePort: "31816"
+
+  feDraft:
+    name: "fe-qlcb-draft"
+    image:
+      name: "qlcb-hr-admin-fe"
+      tag: "20260406v3"
+    limit:
+      memory: "2048Mi"
+    port:
+      containerPort: "80"
+      servicePort: "80"
+      serviceNodePort: "31880"
