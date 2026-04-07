@@ -178,7 +178,6 @@ draftSite:
   feDraft:
     name: "fe-qlcb-draft"
     image:
-      name: "qlcb-hr-admin-fe"
       tag: "20260406v3"
     limit:
       memory: "2048Mi"
