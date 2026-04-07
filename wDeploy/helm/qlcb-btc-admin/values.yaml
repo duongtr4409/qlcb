@@ -179,7 +179,7 @@ draftSite:
     name: "fe-qlcb-draft"
     image:
       name: "qlcb-hr-draft-fe"
-      tag: "20260406v3"
+      tag: "20260406v4"
     limit:
       memory: "2048Mi"
     port:

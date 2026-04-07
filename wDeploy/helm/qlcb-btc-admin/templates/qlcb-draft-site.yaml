@@ -61,7 +61,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.emp.port.servicePort | default "8913" }}
       targetPort: {{ .Values.draftSite.emp.port.containerPort | default "8913" }}
-      nodePort:  {{ .Values.draftSite.emp.port.serviceNodePort | default "31913" }}
+      nodePort:  {{ .Values.draftSite.emp.port.serviceNodePort | default "31813" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -137,7 +137,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.file.port.servicePort | default "8911" }}
       targetPort: {{ .Values.draftSite.file.port.containerPort | default "8911" }}
-      nodePort:  {{ .Values.draftSite.file.port.serviceNodePort | default "31911" }}
+      nodePort:  {{ .Values.draftSite.file.port.serviceNodePort | default "31811" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -209,7 +209,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.report.port.servicePort | default "8915" }}
       targetPort: {{ .Values.draftSite.report.port.containerPort | default "8915" }}
-      nodePort:  {{ .Values.draftSite.report.port.serviceNodePort | default "31915" }}
+      nodePort:  {{ .Values.draftSite.report.port.serviceNodePort | default "31815" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -280,7 +280,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.system.port.servicePort | default "8914" }}
       targetPort: {{ .Values.draftSite.system.port.containerPort | default "8914" }}
-      nodePort:  {{ .Values.draftSite.system.port.serviceNodePort | default "31914" }}
+      nodePort:  {{ .Values.draftSite.system.port.serviceNodePort | default "31814" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -354,7 +354,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.permission.port.servicePort | default "8912" }}
       targetPort: {{ .Values.draftSite.permission.port.containerPort | default "8912" }}
-      nodePort:  {{ .Values.draftSite.permission.port.serviceNodePort | default "31921" }}
+      nodePort:  {{ .Values.draftSite.permission.port.serviceNodePort | default "31821" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -427,7 +427,7 @@ spec:
     # - protocol: TCP
     - port: {{ .Values.draftSite.empDraft.port.servicePort | default "8916" }}
       targetPort: {{ .Values.draftSite.empDraft.port.containerPort | default "8916" }}
-      nodePort:  {{ .Values.draftSite.empDraft.port.serviceNodePort | default "31916" }}
+      nodePort:  {{ .Values.draftSite.empDraft.port.serviceNodePort | default "31816" }}
   type: NodePort
   externalTrafficPolicy: Local
 
@@ -475,7 +475,7 @@ spec:
   ports:
     - port: {{ .Values.draftSite.feDraft.port.servicePort | default "80" }}
       targetPort: {{ .Values.draftSite.feDraft.port.containerPort | default "80" }}
-      nodePort:  {{ .Values.draftSite.feDraft.port.serviceNodePort | default "31980" }}
+      nodePort:  {{ .Values.draftSite.feDraft.port.serviceNodePort | default "31880" }}
   type: NodePort
   externalTrafficPolicy: Local
 
